@@ -2,8 +2,12 @@ import 'tailwindcss/tailwind.css'
 import { MoralisProvider } from "react-moralis";
 
 function MyApp({ Component, pageProps }) {
+
+  const appId = process.env.NEXT_PUBLIC_MORALIS_APPLICATION_ID
+  const serverUrl = process.env.NEXT_PUBLIC_MORALIS_SERVER_URL
+
   return (
-    <MoralisProvider appId=process.env.MORALIS_APP_ID serverUrl=process.env.MORALIS_SERVER_URL>
+    <MoralisProvider appId={appId} serverUrl={serverUrl}>
     	<Component {...pageProps} />
     </MoralisProvider>
   	) 
