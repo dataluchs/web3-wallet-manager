@@ -1,13 +1,28 @@
 import Head from "next/head";
 import Layout from "../../components/layout/layout";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useMoralis } from "react-moralis";
 import { toast } from "react-toastify";
+import { useRouter } from "next/router";
+import LoadingScreen from "../../components/auth/loadingScreen";
 
 export default function Account() {
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    if (isAuthenticated) {
+      Router.push("/");
+    }
+  }, []);
+
+  if (loading) {
+    return <LoadingScreen />;
+  }
+
   const { authenticate, isAuthenticating, isAuthenticated, authError } =
     useMoralis();
+
+  const Router = useRouter();
 
   return (
     <Layout>
@@ -30,8 +45,14 @@ export default function Account() {
                   disabled={isAuthenticating}
                   onClick={() =>
                     authenticate({
-                      onSuccess: () =>
-                        toast.success("Welcome, friend of ethereum 🎉"),
+                      onSuccess: () => {
+                        toast.success("Welcome, friend of ethereum 🎉");
+                        setLoading(true);
+                        setTimeout(() => {
+                          setLoading(false);
+                          Router.replace("/");
+                        }, 2000);
+                      },
                       onError: () =>
                         authError &&
                         toast.error(

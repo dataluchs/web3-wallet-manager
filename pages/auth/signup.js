@@ -1,15 +1,29 @@
 import Head from "next/head";
 import Layout from "../../components/layout/layout";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useMoralis } from "react-moralis";
 import { toast } from "react-toastify";
+import { useRouter } from "next/router";
+import LoadingScreen from "../../components/auth/loadingScreen";
 
 export default function Signup() {
+  const [loading, setLoading] = useState(false);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { Moralis } = useMoralis();
+  const { Moralis, isAuthenticated, login } = useMoralis();
+  const Router = useRouter();
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      Router.push("/");
+    }
+  }, []);
+
+  if (loading) {
+    return <LoadingScreen />;
+  }
 
   const onSubmit = async e => {
     e.preventDefault();
@@ -23,7 +37,16 @@ export default function Signup() {
 
     try {
       await user.signUp();
-      toast.success("Welcome, nice to have you on board! 🚀");
+      login(email, password, {
+        onSuccess: () => {
+          toast.success("Welcome, nice to have you on board! 🎉");
+          setLoading(true);
+          setTimeout(() => {
+            setLoading(false);
+            Router.replace("/");
+          }, 2000);
+        },
+      });
     } catch (error) {
       toast.error(`${error.message}`);
     }

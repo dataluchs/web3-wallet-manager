@@ -5,6 +5,7 @@ import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon, LogoutIcon } from "@heroicons/react/solid";
 import { toast } from "react-toastify";
+import { useRouter } from "next/router";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -14,7 +15,7 @@ function Nav() {
   const [isOpen, setIsOpen] = useState(false);
 
   const { logout, isAuthenticated, user } = useMoralis();
-
+  const Router = useRouter();
   return (
     <div>
       <nav className="bg-white border-b-2">
@@ -35,28 +36,6 @@ function Nav() {
               </div>
               <div className="hidden md:block">
                 <div className="ml-10 flex items-baseline space-x-4">
-                  <Link href={"/"}>
-                    <a
-                      href="#"
-                      className="hover:bg-white text-black px-3 py-2 rounded-md text-sm font-medium"
-                    >
-                      Dashboard
-                    </a>
-                  </Link>
-                  <a
-                    href="/account"
-                    className="hover:bg-white text-black px-3 py-2 rounded-md text-sm font-medium"
-                  >
-                    My Account
-                  </a>
-
-                  <a
-                    href="#"
-                    className="hover:bg-white text-black px-3 py-2 rounded-md text-sm font-medium"
-                  >
-                    Projects
-                  </a>
-
                   {!isAuthenticated ? (
                     <Link href={"/auth"}>
                       <button className="bg-green-400 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
@@ -72,6 +51,14 @@ function Nav() {
                     </div>
                   ) : (
                     <>
+                      <Link href={"/"}>
+                        <a
+                          href="#"
+                          className="hover:bg-white text-black px-3 py-2 rounded-md text-sm font-medium"
+                        >
+                          Dashboard
+                        </a>
+                      </Link>
                       <Menu
                         as="div"
                         className="relative inline-block text-left"
@@ -99,17 +86,18 @@ function Nav() {
                             <div className="py-1">
                               <Menu.Item>
                                 {({ active }) => (
-                                  <a
-                                    href="/account"
-                                    className={classNames(
-                                      active
-                                        ? "bg-gray-100 text-gray-900"
-                                        : "text-gray-700",
-                                      "block px-4 py-2 text-sm"
-                                    )}
-                                  >
-                                    Account settings
-                                  </a>
+                                  <Link href={"/account"}>
+                                    <a
+                                      className={classNames(
+                                        active
+                                          ? "bg-gray-100 text-gray-900"
+                                          : "text-gray-700",
+                                        "block px-4 py-2 text-sm"
+                                      )}
+                                    >
+                                      Account settings
+                                    </a>
+                                  </Link>
                                 )}
                               </Menu.Item>
 
@@ -121,10 +109,12 @@ function Nav() {
                                       onClick={() => logout()}
                                       onClick={() =>
                                         logout({
-                                          onSuccess: () =>
+                                          onSuccess: () => {
                                             toast.success(
                                               "Successfully signed out. See you soon 😘"
-                                            ),
+                                            );
+                                            Router.replace("/auth");
+                                          },
                                         })
                                       }
                                       className={classNames(

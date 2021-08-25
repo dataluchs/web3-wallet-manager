@@ -1,21 +1,42 @@
 import Head from "next/head";
 import Layout from "../../components/layout/layout";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useMoralis } from "react-moralis";
 import { toast } from "react-toastify";
+import { useRouter } from "next/router";
+import LoadingScreen from "../../components/auth/loadingScreen";
 
 export default function Login() {
+  const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { login } = useMoralis();
+  const { login, isAuthenticated } = useMoralis();
+  const Router = useRouter();
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      Router.push("/");
+    }
+  }, []);
+
+  if (loading) {
+    return <LoadingScreen />;
+  }
 
   const onSubmit = async e => {
     e.preventDefault();
     login(email, password, {
       onError: () =>
         toast.error("Login credentials not correct! Try again, please. 💪"),
-      onSuccess: () => toast.success("Welcome back, friend! 🚀"),
+      onSuccess: () => {
+        toast.success("Welcome back, friend! 🎉");
+        setLoading(true);
+        setTimeout(() => {
+          setLoading(false);
+          Router.replace("/");
+        }, 2000);
+      },
     });
   };
 
