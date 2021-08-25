@@ -1,10 +1,12 @@
 import Nav from "../navbar/navbar";
 import Footer from "./footer";
 import { React } from "react";
+import Auth from "../auth";
 
-const Layout = ({ children }) => {
+const OnlyWithAuthLayout = ({ children }) => {
   return (
     <>
+      <Auth />
       <Nav />
       <div className="">{children}</div>
       <Footer />
@@ -12,4 +14,4 @@ const Layout = ({ children }) => {
   );
 };
 
-export default Layout;
+export default OnlyWithAuthLayout;
