@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useMoralis } from "react-moralis";
 import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
-import { ChevronDownIcon, LogoutIcon } from "@heroicons/react/solid";
+import { ChevronDownIcon } from "@heroicons/react/solid";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 
@@ -18,8 +18,8 @@ function Nav() {
   const Router = useRouter();
   return (
     <div>
-      <nav className="bg-white border-b-2">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <nav className="border-b-2">
+        <div className="dark:bg-gray-800 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center w-full justify-between">
               <div className="flex-shrink-0">

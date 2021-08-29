@@ -1,5 +1,6 @@
 import "tailwindcss/tailwind.css";
 import { MoralisProvider } from "react-moralis";
+import { ThemeProvider } from "next-themes";
 import CustomToast from "../components/notification/customToast";
 
 function MyApp({ Component, pageProps }) {
@@ -8,8 +9,10 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <MoralisProvider appId={appId} serverUrl={serverUrl}>
-      <CustomToast />
-      <Component {...pageProps} />
+      <CustomToast />{" "}
+      <ThemeProvider attribute="class">
+        <Component {...pageProps} />
+      </ThemeProvider>
     </MoralisProvider>
   );
 }

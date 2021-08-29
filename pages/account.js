@@ -5,12 +5,9 @@ import { useMoralis } from "react-moralis";
 import { useEffect } from "react";
 
 export default function Home() {
-
   const { user } = useMoralis();
-  useEffect(() => {
-    console.log(user?.attributes)
+  useEffect(() => {}, []);
 
-  }, [])
   return (
     <OnlyWithAuthLayout>
       <div>
@@ -31,8 +28,7 @@ export default function Home() {
         </header>
         <main>
           <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-            <div className="px-4 py-6 sm:px-0">
-            </div>
+            <div className="px-4 py-6 sm:px-0"></div>
           </div>
         </main>
       </div>
