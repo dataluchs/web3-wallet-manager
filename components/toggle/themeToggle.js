@@ -20,10 +20,6 @@ const ThemeToggle = () => {
 
   return (
     <div className="flex justify-between items-center">
-      <pre> {JSON.stringify(user?.attributes, undefined, 4)} </pre>
-      <h2 className="mr-3">
-        {user?.attributes.theme === "dark" ? "Dark" : "Light"} Mode
-      </h2>
       <div
         className="w-16 h-10 bg-gray-300 dark:bg-green-400 rounded-full flex-shrink-0 p-1"
         onClick={handleClick}
