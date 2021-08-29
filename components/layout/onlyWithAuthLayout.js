@@ -9,7 +9,6 @@ const OnlyWithAuthLayout = ({ children }) => {
       <Auth />
       <Nav />
       <div className="">{children}</div>
-      <Footer />
     </>
   );
 };

@@ -7,7 +7,6 @@ const Layout = ({ children }) => {
     <>
       <Nav />
       <div className="">{children}</div>
-      <Footer />
     </>
   );
 };

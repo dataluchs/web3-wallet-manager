@@ -2,6 +2,7 @@ import "tailwindcss/tailwind.css";
 import { MoralisProvider } from "react-moralis";
 import { ThemeProvider } from "next-themes";
 import CustomToast from "../components/notification/customToast";
+import "../styles/index.css";
 
 function MyApp({ Component, pageProps }) {
   const appId = process.env.NEXT_PUBLIC_MORALIS_APPLICATION_ID;

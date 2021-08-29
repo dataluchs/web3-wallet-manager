@@ -3,6 +3,10 @@ module.exports = {
   purge: ["./pages/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}"],
   darkMode: "class", // or 'media' or 'class'
   theme: {
+    minHeight: {
+      screen: "100vh",
+      screen70: "70vh",
+    },
     extend: {
       animation: {
         fadeIn: "fadeIn 1s",

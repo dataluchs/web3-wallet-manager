@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useMoralis } from "react-moralis";
 import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
-import { ChevronDownIcon } from "@heroicons/react/solid";
+import { ChevronDownIcon, LogoutIcon } from "@heroicons/react/solid";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 
@@ -18,19 +18,26 @@ function Nav() {
   const Router = useRouter();
   return (
     <div>
-      <nav className="border-b-2">
-        <div className="dark:bg-gray-800 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <nav className="dark:bg-gray-900 bg-white dark:border-gray-600 border-b-2 p-2">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center w-full justify-between">
-              <div className="flex-shrink-0">
+              <div className="flex-shrink-0 leading-6">
                 <Link href="/">
-                  <a>
-                    <img
+                  <a className="dark:text-white">
+                    {/* <img
                       className="h-8 w-auto"
                       //src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
                       src="/images/blockfriends.png"
                       alt="blockfriends"
-                    />
+                    /> */}
+                    <span className="font-bold italic dark:border-green-300 border-b-4">
+                      Wallytics.
+                    </span>
+                    <br />
+                    <span className="text-xs dark:text-gray-400 -mt-4">
+                      Cross-chain Wallet Analytics.
+                    </span>
                   </a>
                 </Link>
               </div>
@@ -54,9 +61,17 @@ function Nav() {
                       <Link href={"/"}>
                         <a
                           href="#"
-                          className="hover:bg-white text-black px-3 py-2 rounded-md text-sm font-medium"
+                          className="dark:text-white dark:hover:bg-gray-700 hover:bg-white text-black px-3 py-2 rounded-md text-sm font-medium"
                         >
                           Dashboard
+                        </a>
+                      </Link>
+                      <Link href={"/"}>
+                        <a
+                          href="#"
+                          className="dark:text-white dark:hover:bg-gray-700 hover:bg-white text-black px-3 py-2 rounded-md text-sm font-medium"
+                        >
+                          NFTs
                         </a>
                       </Link>
                       <Menu
@@ -64,7 +79,7 @@ function Nav() {
                         className="relative inline-block text-left"
                       >
                         <div>
-                          <Menu.Button className="inline-flex justify-center w-full rounded-md border border-purple-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500">
+                          <Menu.Button className="dark:bg-gray-800 dark:text-white inline-flex justify-center w-full rounded-xl border dark:focus:ring-green-200 dark:border-green-300 dark:focus:ring-offset-gray-600 border-purple-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500">
                             {user.get("username")}
                             <ChevronDownIcon
                               className="-mr-1 ml-2 h-5 w-5"
@@ -82,7 +97,7 @@ function Nav() {
                           leaveFrom="transform opacity-100 scale-100"
                           leaveTo="transform opacity-0 scale-95"
                         >
-                          <Menu.Items className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+                          <Menu.Items className="dark:bg-gray-800 dark:border-gray-600 border-2 dark:text-white origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
                             <div className="py-1">
                               <Menu.Item>
                                 {({ active }) => (
@@ -90,8 +105,8 @@ function Nav() {
                                     <a
                                       className={classNames(
                                         active
-                                          ? "bg-gray-100 text-gray-900"
-                                          : "text-gray-700",
+                                          ? "dark:bg-gray-800 dark:text-white bg-gray-100 text-gray-900"
+                                          : "dark:bg-gray-800 dark:text-white text-gray-700",
                                         "block px-4 py-2 text-sm"
                                       )}
                                     >
@@ -119,8 +134,8 @@ function Nav() {
                                       }
                                       className={classNames(
                                         active
-                                          ? "bg-gray-100 text-gray-900"
-                                          : "text-gray-700",
+                                          ? "dark:bg-gray-800 dark:text-white bg-gray-100 text-gray-900"
+                                          : "dark:bg-gray-800 dark:text-white text-gray-700",
                                         "block w-full text-left px-4 py-2 text-sm"
                                       )}
                                     >
@@ -197,58 +212,26 @@ function Nav() {
           {ref => (
             <div className="md:hidden" id="mobile-menu">
               <div ref={ref} className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a
-                  href="/"
-                  className="hover:bg-gray-700 text-white block px-3 py-2 rounded-md text-base font-medium"
-                >
-                  Dashboard
-                </a>
-
-                <a
-                  href="#"
-                  className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                >
-                  Team
-                </a>
-
-                <a
-                  href="#"
-                  className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                >
-                  Projects
-                </a>
-
-                <a
-                  href="#"
-                  className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                >
-                  Calendar
-                </a>
-
-                <a
-                  href="#"
-                  className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                >
-                  Reports
-                </a>
+                {isAuthenticated ? (
+                  <a
+                    href="/"
+                    className="hover:bg-gray-700 text-white block px-3 py-2 rounded-md text-base font-medium"
+                  >
+                    Dashboard
+                  </a>
+                ) : (
+                  <a
+                    href="/"
+                    className="hover:bg-gray-700 text-white block px-3 py-2 rounded-md text-base font-medium"
+                  >
+                    Connect / Login
+                  </a>
+                )}
               </div>
             </div>
           )}
         </Transition>
       </nav>
-
-      {/* <header className="bg-white shadow">
-        <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-          <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
-        </div>
-      </header>
-      <main>
-        <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-          <div className="px-4 py-6 sm:px-0">
-            <div className="border-4 border-dashed border-gray-200 rounded-lg h-96"></div>
-          </div>
-        </div>
-      </main> */}
     </div>
   );
 }
