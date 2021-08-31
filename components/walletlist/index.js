@@ -5,21 +5,25 @@ import Link from "next/link";
 import WalletAddress from "../form/walletAddress";
 import Image from "next/image";
 
+import plgSvg from "../../public/svgs/matic-logo.svg";
+import ethSvg from "../../public/svgs/ethereum-logo.svg";
+import bnbSvg from "../../public/svgs/bnb-logo.svg";
+
 const plans = [
   {
     name: "Ethereum",
     symbol: "ETH",
-    icon: "",
+    icon: { ethSvg },
   },
   {
     name: "Binance Smart Chain",
     symbol: "BSC",
-    icon: "",
+    icon: { bnbSvg },
   },
   {
     name: "Polygon",
     symbol: "PLG",
-    icon: "",
+    icon: { plgSvg },
   },
 ];
 
@@ -101,6 +105,19 @@ const WalletAccountList = ({ pageTitle, walletId }) => {
                           : null
                       } active:rotate-45 active:border-green-200 hover:shadow-4xl justify-center relative transform hover:rotate-45 hover:border-green-200 duration-500 p-2 m-2 w-12 h-12 dark:bg-gray-900 dark:hover:bg-gray-700 border-4 rounded-full text-sm`}
                     >
+                      <Image
+                        src={
+                          i.attributes.chain === "ETH"
+                            ? ethSvg
+                            : plgSvg && i.attributes.chain === "PLG"
+                            ? plgSvg
+                            : plgSvg && i.attributes.chain === "BSC"
+                            ? bnbSvg
+                            : plgSvg
+                        }
+                        layout="fill"
+                        objectFit="cover"
+                      />
                       {i.attributes.chain}
                     </div>
                   </Link>
