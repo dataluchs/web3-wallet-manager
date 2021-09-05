@@ -73,7 +73,10 @@ const WalletAccountList = ({ pageTitle, walletId }) => {
   return (
     <header className="dark:border-gray-600 dark:text-white border-b-2 shadow">
       <div className="flex items-center max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-        <div className="pr-10 mr-10 border-r-2 dark:border-gray-600">
+        <div
+          className="pr-10 mr-10 border-r-2 dark:border-gray-600"
+          style={{ minWidth: 250 }}
+        >
           <h1 className="text-3xl font-bold">{pageTitle}</h1>
         </div>
         <div>
