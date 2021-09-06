@@ -41,3 +41,6 @@ export const toEth = wei => tokenValueTxt(wei, 18, "ETH");
 export const toGwei = wei => {
   return `${Math.round(wei / 1e9)} gwei`;
 };
+
+// to erc20
+export const toErc20 = (wei, symbol) => tokenValueTxt(wei, 18, symbol);
